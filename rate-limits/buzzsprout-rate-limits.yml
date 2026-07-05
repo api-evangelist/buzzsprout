@@ -1,0 +1,61 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Buzzsprout
+providerId: buzzsprout
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Podcasting
+- Podcast Hosting
+- Audio
+- Rate Limiting
+- Quotas
+description: >-
+  Buzzsprout does not publish fixed numeric per-minute or per-hour rate limits
+  for its REST API. The documentation instead emphasizes correct client behavior:
+  send a custom User-Agent (default agents may be blocked), set Content-Type to
+  application/json; charset=utf-8 on writes (a wrong type returns 415), and honor
+  HTTP caching. Responses include ETag / Last-Modified headers, and clients are
+  expected to store them and resubmit as If-None-Match / If-Modified-Since to get
+  304 Not Modified responses and avoid unnecessary traffic. The practical usage
+  ceiling is the account's plan upload-hour allowance rather than an API request
+  cap.
+notes: >-
+  No numeric request-rate limit is documented in the buzzsprout/buzzsprout-api
+  repository as of the review date. Blocked or default User-Agents can be rejected
+  outright. Verify any current limits with Buzzsprout support during reconciliation.
+sources:
+- https://github.com/buzzsprout/buzzsprout-api
+- https://github.com/buzzsprout/buzzsprout-api/blob/master/README.md
+responseCodes:
+  unsupportedMediaType: 415
+  serverErrors:
+  - 500
+  - 502
+  - 503
+  - 504
+limits:
+- name: API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the Buzzsprout API.
+- name: Upload Hours
+  scope: account
+  metric: hours
+  limit: per plan
+  notes: Audio upload volume is bounded by the account's plan allowance, not by an API request cap.
+policies:
+- name: User-Agent Required
+  description: Requests must set a custom User-Agent header; some default agents are blocked.
+- name: HTTP Caching
+  description: Responses carry ETag / Last-Modified; clients should send If-None-Match / If-Modified-Since to receive 304 Not Modified.
+- name: Content-Type Enforcement
+  description: POST and PUT requests must use Content-Type application/json; charset=utf-8 or the API returns 415 Unsupported Media Type.
+- name: Retry on Server Errors
+  description: Clients should implement retry logic for 5xx responses (500, 502, 503, 504), ideally with exponential backoff.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,91 @@
+aid: buzzsprout
+url: https://raw.githubusercontent.com/api-evangelist/buzzsprout/refs/heads/main/apis.yml
+name: Buzzsprout
+kind: company
+description: Buzzsprout is a podcast hosting platform that handles hosting, distribution,
+  promotion, and analytics for podcasters - uploading and optimizing audio, publishing
+  an RSS feed, listing shows in directories like Apple Podcasts and Spotify, and
+  reporting on plays. Buzzsprout also exposes a documented public REST API (base
+  https://www.buzzsprout.com/api) so third parties can programmatically read and
+  manage the podcasts and episodes on an account. The API is RESTful, JSON-serialized,
+  SSL-only, and authenticated with a per-account token.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Podcasting
+- Podcast Hosting
+- Audio
+- Media
+- Episodes
+- RSS
+created: '2026-07-05'
+modified: '2026-07-05'
+specificationVersion: '0.19'
+apis:
+- aid: buzzsprout:buzzsprout-episodes-api
+  name: Buzzsprout Episodes API
+  tags:
+  - Episodes
+  - Audio
+  - Publishing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/episodes.md
+  baseURL: https://www.buzzsprout.com/api
+  properties:
+  - url: https://github.com/buzzsprout/buzzsprout-api
+    type: Documentation
+  - url: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/episodes.md
+    type: APIReference
+  - url: openapi/buzzsprout-openapi.yml
+    type: OpenAPI
+  - url: collections/buzzsprout.postman_collection.json
+    type: PostmanCollection
+  - url: collections/buzzsprout.opencollection.json
+    type: OpenCollection
+  description: List, retrieve, create, and update the episodes on a Buzzsprout podcast.
+    Episodes are scoped to a podcast id at /api/{podcast_id}/episodes.json, and audio
+    can be attached by URL or file upload with optional email notification after
+    processing. Requests are SSL-only and token-authenticated.
+- aid: buzzsprout:buzzsprout-podcasts-api
+  name: Buzzsprout Podcasts API
+  tags:
+  - Podcasts
+  - Directories
+  - Metadata
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/podcasts.md
+  baseURL: https://www.buzzsprout.com/api
+  properties:
+  - url: https://github.com/buzzsprout/buzzsprout-api
+    type: Documentation
+  - url: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/podcasts.md
+    type: APIReference
+  - url: openapi/buzzsprout-openapi.yml
+    type: OpenAPI
+  - url: collections/buzzsprout.postman_collection.json
+    type: PostmanCollection
+  - url: collections/buzzsprout.opencollection.json
+    type: OpenCollection
+  description: List the podcasts on a Buzzsprout account at /api/podcasts.json,
+    returning each show's title, author, description, contact email, categories,
+    language, timezone, artwork, and website. Used to discover podcast ids that
+    scope the Episodes API.
+common:
+- type: GitHubOrganization
+  url: https://github.com/buzzsprout
+- type: LinkedIn
+  url: https://www.linkedin.com/company/buzzsprout
+- type: Website
+  url: https://www.buzzsprout.com
+- type: Documentation
+  url: https://github.com/buzzsprout/buzzsprout-api
+- type: Plans
+  url: plans/buzzsprout-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/buzzsprout-rate-limits.yml
+- type: FinOps
+  url: finops/buzzsprout-finops.yml
+- url: https://www.buzzsprout.com/blog
+  type: Blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

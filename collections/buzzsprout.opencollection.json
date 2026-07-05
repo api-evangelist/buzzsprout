@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buzzsprout API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "Authorization",
+        "value": "Token token={{apiToken}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Podcasts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List podcasts", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://www.buzzsprout.com/api/podcasts.json",
+            "headers": [
+              { "name": "User-Agent", "value": "apis-io-catalog" }
+            ]
+          },
+          "docs": "Lists the podcasts on the authenticated Buzzsprout account. Use the returned podcast id to scope Episodes API requests."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Episodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Get episodes", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://www.buzzsprout.com/api/:podcast_id/episodes.json",
+            "params": [
+              { "name": "podcast_id", "value": "", "type": "path", "description": "The numeric Buzzsprout podcast identifier." }
+            ],
+            "headers": [
+              { "name": "User-Agent", "value": "apis-io-catalog" }
+            ]
+          },
+          "docs": "Retrieves all episodes for the given podcast."
+        },
+        {
+          "info": { "name": "Get an episode", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://www.buzzsprout.com/api/:podcast_id/episodes/:id.json",
+            "params": [
+              { "name": "podcast_id", "value": "", "type": "path", "description": "The numeric Buzzsprout podcast identifier." },
+              { "name": "id", "value": "", "type": "path", "description": "The numeric episode identifier." }
+            ],
+            "headers": [
+              { "name": "User-Agent", "value": "apis-io-catalog" }
+            ]
+          },
+          "docs": "Retrieves a single episode by id."
+        },
+        {
+          "info": { "name": "Create an episode", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://www.buzzsprout.com/api/:podcast_id/episodes.json",
+            "params": [
+              { "name": "podcast_id", "value": "", "type": "path", "description": "The numeric Buzzsprout podcast identifier." }
+            ],
+            "headers": [
+              { "name": "User-Agent", "value": "apis-io-catalog" },
+              { "name": "Content-Type", "value": "application/json; charset=utf-8" }
+            ],
+            "body": { "type": "json", "data": "{\n  \"title\": \"My New Episode\",\n  \"description\": \"Episode description.\",\n  \"audio_url\": \"https://example.com/audio.mp3\",\n  \"episode_number\": 1,\n  \"private\": false\n}" }
+          },
+          "docs": "Creates a new episode. Provide audio via audio_url or an uploaded audio_file."
+        },
+        {
+          "info": { "name": "Update an episode", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.buzzsprout.com/api/:podcast_id/episodes/:id.json",
+            "params": [
+              { "name": "podcast_id", "value": "", "type": "path", "description": "The numeric Buzzsprout podcast identifier." },
+              { "name": "id", "value": "", "type": "path", "description": "The numeric episode identifier." }
+            ],
+            "headers": [
+              { "name": "User-Agent", "value": "apis-io-catalog" },
+              { "name": "Content-Type", "value": "application/json; charset=utf-8" }
+            ],
+            "body": { "type": "json", "data": "{\n  \"private\": true\n}" }
+          },
+          "docs": "Updates an existing episode. Send only the fields to change."
+        }
+      ]
+    }
+  ]
+}

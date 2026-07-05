@@ -1,0 +1,87 @@
+aid: buzzsprout
+name: Buzzsprout
+review:
+  question: Does Buzzsprout expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-05'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Buzzsprout's public API surface is a
+    request/response REST API over HTTPS (base https://www.buzzsprout.com/api)
+    covering podcasts and episodes. There is no server-push transport
+    (WebSocket or SSE) on Buzzsprout's own API to model. Buzzsprout's real-time
+    distribution happens through the podcast RSS feed and downstream directories
+    (Apple Podcasts, Spotify, etc.), which are their own syndication mechanisms
+    and out of scope for a Buzzsprout AsyncAPI document.
+findings:
+  summary: |
+    Buzzsprout does not publish a documented public WebSocket API. Buzzsprout is
+    a podcast hosting platform. Its public API is a RESTful, JSON-serialized,
+    SSL-only HTTP API documented in the official github.com/buzzsprout/buzzsprout-api
+    repository, with a base URL of https://www.buzzsprout.com/api. Episode
+    resources are scoped to a numeric podcast id (/api/{podcast_id}/episodes.json)
+    and the account's podcasts are listed at /api/podcasts.json. Authentication
+    uses a simple token scheme sent either as the header
+    "Authorization: Token token=YOUR_TOKEN" or as an api_token query parameter.
+    All documented operations are request/response REST - no realtime,
+    bidirectional, or streaming WebSocket (ws:// or wss://) endpoint is
+    described anywhere in Buzzsprout's API documentation as of the review date.
+  openSource: |
+    Buzzsprout itself is a proprietary SaaS platform. What is open is the API
+    documentation: the official reference lives in the public repository
+    github.com/buzzsprout/buzzsprout-api. There is no self-hostable Buzzsprout
+    server component.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://www.buzzsprout.com/api
+      documented: true
+      note: Request/response REST for podcasts and episodes. SSL only. Token auth via Authorization header or api_token query parameter.
+    - protocol: RSS
+      scheme: https
+      documented: true
+      note: Podcast distribution is via the generated RSS feed and downstream directories, not a Buzzsprout WebSocket. Out of scope for AsyncAPI.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the Buzzsprout API reference as of the review date.
+  endpointsConfirmedRest:
+    - GET  https://www.buzzsprout.com/api/podcasts.json
+    - GET  https://www.buzzsprout.com/api/{podcast_id}/episodes.json
+    - POST https://www.buzzsprout.com/api/{podcast_id}/episodes.json
+    - GET  https://www.buzzsprout.com/api/{podcast_id}/episodes/{id}.json
+    - PUT  https://www.buzzsprout.com/api/{podcast_id}/episodes/{id}.json
+  authNotes: |
+    Token authentication. Header form: "Authorization: Token token=YOUR_TOKEN"
+    (the token is prefixed by the literal "token=" with no whitespace).
+    Alternatively pass "?api_token=YOUR_TOKEN". Tokens are retrieved from the
+    Buzzsprout admin account section. A custom User-Agent is required (default
+    agents may be blocked), and writes must use Content-Type
+    application/json; charset=utf-8 or a 415 is returned. Responses carry ETag /
+    Last-Modified for conditional (304) requests.
+sources:
+  - url: https://github.com/buzzsprout/buzzsprout-api
+    type: Documentation
+    note: Official Buzzsprout API documentation repository. Base URL, token auth, SSL, User-Agent, caching. No WebSocket mentioned.
+  - url: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/episodes.md
+    type: APIReference
+    note: Episodes - GET list, GET by id, POST create, PUT update. No DELETE documented.
+  - url: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/podcasts.md
+    type: APIReference
+    note: Podcasts - GET /api/podcasts.json listing account podcasts.
+  - url: https://www.buzzsprout.com/api
+    type: Documentation
+    note: Public API landing page. RESTful, JSON, SSL only.
+  - url: https://www.buzzsprout.com/pricing
+    type: Plans
+    note: Free tier plus upload-hour subscription plans; API is included at no separate charge.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Buzzsprout's own public API is
+    request/response REST (podcasts and episodes) authenticated with a token.
+    No AsyncAPI document was created because there is no server-push transport
+    on Buzzsprout's own API to model; distribution happens via the RSS feed and
+    downstream podcast directories, which carry their own mechanisms.

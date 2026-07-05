@@ -1,0 +1,85 @@
+{
+  "info": {
+    "name": "Buzzsprout API",
+    "description": "Documented public REST API for the Buzzsprout podcast hosting platform (github.com/buzzsprout/buzzsprout-api). Base URL: https://www.buzzsprout.com/api. All requests are SSL-only and token-authenticated. Send the token as the header Authorization: Token token=YOUR_TOKEN, or as an api_token query parameter. Episode resources are scoped to a numeric podcast id. Set a custom User-Agent and Content-Type application/json; charset=utf-8 on POST/PUT.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "Authorization", "type": "string" },
+      { "key": "value", "value": "Token token={{apiToken}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://www.buzzsprout.com/api", "type": "string" },
+    { "key": "apiToken", "value": "", "type": "string" },
+    { "key": "podcastId", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Podcasts",
+      "item": [
+        {
+          "name": "List podcasts",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "User-Agent", "value": "apis-io-catalog" }],
+            "url": { "raw": "{{baseUrl}}/podcasts.json", "host": ["{{baseUrl}}"], "path": ["podcasts.json"] },
+            "description": "Lists the podcasts on the authenticated Buzzsprout account. Use the returned podcast id to scope Episodes API requests."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Episodes",
+      "item": [
+        {
+          "name": "Get episodes",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "User-Agent", "value": "apis-io-catalog" }],
+            "url": { "raw": "{{baseUrl}}/{{podcastId}}/episodes.json", "host": ["{{baseUrl}}"], "path": ["{{podcastId}}", "episodes.json"] },
+            "description": "Retrieves all episodes for the given podcast."
+          }
+        },
+        {
+          "name": "Get an episode",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "User-Agent", "value": "apis-io-catalog" }],
+            "url": { "raw": "{{baseUrl}}/{{podcastId}}/episodes/:id.json", "host": ["{{baseUrl}}"], "path": ["{{podcastId}}", "episodes", ":id.json"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single episode by id."
+          }
+        },
+        {
+          "name": "Create an episode",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "User-Agent", "value": "apis-io-catalog" },
+              { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"My New Episode\",\n  \"description\": \"Episode description.\",\n  \"audio_url\": \"https://example.com/audio.mp3\",\n  \"episode_number\": 1,\n  \"private\": false\n}" },
+            "url": { "raw": "{{baseUrl}}/{{podcastId}}/episodes.json", "host": ["{{baseUrl}}"], "path": ["{{podcastId}}", "episodes.json"] },
+            "description": "Creates a new episode. Provide audio via audio_url or an uploaded audio_file."
+          }
+        },
+        {
+          "name": "Update an episode",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "User-Agent", "value": "apis-io-catalog" },
+              { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"private\": true\n}" },
+            "url": { "raw": "{{baseUrl}}/{{podcastId}}/episodes/:id.json", "host": ["{{baseUrl}}"], "path": ["{{podcastId}}", "episodes", ":id.json"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Updates an existing episode. Send only the fields to change."
+          }
+        }
+      ]
+    }
+  ]
+}

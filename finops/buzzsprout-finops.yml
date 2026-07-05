@@ -1,0 +1,92 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Buzzsprout
+providerId: buzzsprout
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Podcasting
+- Podcast Hosting
+- Audio
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Buzzsprout spend. Buzzsprout bills a flat monthly subscription
+  selected by upload-hour allowance rather than by API calls - the REST API is
+  included at no separate charge. The dominant cost drivers are the chosen plan
+  tier (upload hours), any overage above the allowance, and optional add-ons
+  (Cohost AI, Magic Mastering) billed on top of the base plan. Annual billing is
+  cheaper than month-to-month. Because API access carries no incremental fee,
+  cost optimization is about right-sizing the plan to actual monthly upload
+  volume and controlling add-on subscriptions.
+notes: >-
+  Per-unit overage and add-on rates are not reconciled here; verify current
+  numbers on the Buzzsprout pricing page. There is no usage-metered API billing
+  to track - spend is subscription plus add-ons.
+sources:
+- https://www.buzzsprout.com/pricing
+- https://www.buzzsprout.com/
+- https://github.com/buzzsprout/buzzsprout-api
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Buzzsprout
+serviceCategory: Media and Podcast Hosting
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Buzzsprout Podcast Hosting
+  ServiceCategory: Media and Podcast Hosting
+  ProviderName: Buzzsprout
+  PublisherName: Buzzsprout
+  InvoiceIssuerName: Buzzsprout
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: plan_subscription
+  description: Monthly (or annual) subscription fee for the selected upload-hour tier.
+  unit: subscription
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: upload_hours
+  description: Audio upload hours consumed against the plan allowance.
+  unit: hours
+  aggregation: sum
+  dimensions:
+  - account
+  - podcast
+- name: addons
+  description: Optional add-on subscriptions such as Cohost AI and Magic Mastering.
+  unit: subscription
+  aggregation: sum
+  dimensions:
+  - account
+  - addon
+principles:
+- name: Visibility
+  description: Track the plan tier, upload hours consumed, and any active add-ons per account.
+- name: Allocation
+  description: On Multi-Podcast plans, attribute shared upload hours to individual shows to map cost to each podcast.
+- name: Optimization
+  description: Right-size the plan to actual monthly upload volume, prefer annual billing, and disable unused add-ons; the REST API adds no incremental cost.
+- name: Accountability
+  description: Assign an owner per account and review monthly plan tier and add-ons against actual upload usage.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

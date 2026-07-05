@@ -1,0 +1,152 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Buzzsprout
+providerId: buzzsprout
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Podcasting
+- Podcast Hosting
+- Audio
+- Plans
+description: >-
+  Buzzsprout sells podcast hosting on upload-hour tiers, not on API usage - the
+  REST API is included with an account at no separate charge and is metered only
+  by the same upload allowance as the rest of the platform. There is a free tier
+  (2 hours of uploads per month, episodes hosted for 90 days) and paid plans
+  priced on upload hours. The prices below are the annual-billing monthly rates
+  shown on the Buzzsprout pricing page as of the review date; month-to-month
+  billing costs more. An Archive plan keeps a podcast online without new uploads,
+  and optional add-ons (Cohost AI, Magic Mastering) are billed on top of a base
+  plan.
+notes: >-
+  Prices reflect annual-billing monthly equivalents from buzzsprout.com/pricing
+  and may change; verify current tiers, upload allowances, and add-on pricing on
+  the pricing page during reconciliation. Buzzsprout has historically also offered
+  monthly-upload-hour plans; the current page prices on annual upload hours.
+sources:
+- https://www.buzzsprout.com/pricing
+- https://www.buzzsprout.com/
+- https://github.com/buzzsprout/buzzsprout-api
+plans:
+- id: buzzsprout-free
+  name: Free
+  type: free
+  description: >-
+    Free tier for getting started - up to 2 hours of uploads per month, with
+    episodes hosted for 90 days. No paid add-ons or video distribution.
+  entries:
+  - label: Monthly Upload Hours
+    name: free_upload_hours
+    type: usage
+    metric: hours
+    limit: 2
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free
+    userMultiplied: false
+  elements:
+  - name: Unlimited Episodes (90-day hosting)
+  - name: Podcast Website
+  - name: REST API Access
+- id: buzzsprout-audio-podcast
+  name: Audio Podcast
+  type: paid
+  description: >-
+    Single audio podcast with unlimited episodes, permanent hosting, directory
+    listings, advanced stats, and a premium website. Priced at the annual-billing
+    monthly rate.
+  entries:
+  - label: Annual Upload Hours
+    name: audio_upload_hours
+    type: usage
+    metric: hours
+    limit: 72
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: 15.00
+    currency: USD
+    period: month
+    userMultiplied: false
+  elements:
+  - name: Single Podcast
+  - name: Unlimited Episodes
+  - name: Directory Listings
+  - name: Advanced Stats
+  - name: REST API Access
+- id: buzzsprout-audio-video
+  name: Audio + Video
+  type: paid
+  description: >-
+    Everything in Audio Podcast plus video publishing to Apple Podcasts at 1080p.
+    Priced at the annual-billing monthly rate.
+  entries:
+  - label: Annual Upload Hours
+    name: audio_video_upload_hours
+    type: usage
+    metric: hours
+    limit: 72
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: 25.00
+    currency: USD
+    period: month
+    userMultiplied: false
+  elements:
+  - name: Single Podcast
+  - name: Video Distribution (1080p)
+  - name: REST API Access
+- id: buzzsprout-multi-podcast
+  name: Multi-Podcast
+  type: paid
+  description: >-
+    Manage multiple shows under one account - 5 podcasts (audio) or 10 podcasts
+    (audio + video), with upload hours shared across all shows. Priced at the
+    annual-billing monthly rate.
+  entries:
+  - label: Annual Upload Hours
+    name: multi_upload_hours
+    type: usage
+    metric: hours
+    limit: 180
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: 30.00
+    currency: USD
+    period: month
+    userMultiplied: false
+  elements:
+  - name: Up to 5 Podcasts (Audio) or 10 (Audio + Video)
+  - name: Shared Upload Hours
+  - name: REST API Access
+- id: buzzsprout-archive
+  name: Archive
+  type: paid
+  description: >-
+    Keeps an existing podcast online without new uploads; can switch back to a
+    standard plan at any time.
+  entries:
+  - label: Archive Hosting
+    name: archive_hosting
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 5.00
+    currency: USD
+    period: month
+    userMultiplied: false
+  elements:
+  - name: Keep Podcast Online
+  - name: No New Uploads
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
