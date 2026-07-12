@@ -70,6 +70,10 @@ apis:
     language, timezone, artwork, and website. Used to discover podcast ids that
     scope the Episodes API.
 common:
+- type: DomainSecurity
+  url: security/buzzsprout-domain-security.yml
+- type: Authentication
+  url: authentication/buzzsprout-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/buzzsprout
 - type: LinkedIn

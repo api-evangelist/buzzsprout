@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/buzzsprout-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: tokenAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'Token authentication. Send the header as `Authorization: Token token=YOUR_TOKEN`.
+    Alternatively pass the token as an `api_token` query parameter. Tokens are found in the
+    Buzzsprout admin account settings.'
+  sources:
+  - openapi/buzzsprout-openapi.yml
