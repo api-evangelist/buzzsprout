@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: Buzzsprout Episodes Podcasts API
+  description: 'The Buzzsprout API is a documented public REST API for the Buzzsprout podcast hosting platform, intended for third parties integrating with the service. It is designed around RESTful concepts with JSON for serialization. All requests are SSL-only against the base URL https://www.buzzsprout.com/api, where episode resources are scoped to a numeric podcast id (for example /api/{podcast_id}/episodes.json). Authentication uses a simple token scheme: the token is sent in the Authorization header as `Token token=YOUR_TOKEN`, or as an `api_token` query parameter. Clients must send a custom User-Agent (some default agents are blocked) and set Content-Type to `application/json; charset=utf-8` on POST and PUT requests. Responses carry ETag / Last-Modified headers for conditional (304) requests. Only the endpoints documented in the official buzzsprout/buzzsprout-api repository are modeled here.'
+  version: '1.0'
+  contact:
+    name: Buzzsprout
+    url: https://www.buzzsprout.com
+servers:
+- url: https://www.buzzsprout.com/api
+  description: Buzzsprout API (SSL only)
+security:
+- tokenAuth: []
+tags:
+- name: Podcasts
+  description: The podcasts on a Buzzsprout account.
+paths:
+  /podcasts.json:
+    get:
+      operationId: listPodcasts
+      tags:
+      - Podcasts
+      summary: List podcasts
+      description: Lists the podcasts on the authenticated Buzzsprout account. Use the returned podcast id to scope Episodes API requests.
+      responses:
+        '200':
+          description: A list of podcasts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Podcast'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid token.
+  schemas:
+    Podcast:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        author:
+          type: string
+        description:
+          type: string
+        website_address:
+          type: string
+          nullable: true
+        contact_email:
+          type: string
+        keywords:
+          type: string
+          nullable: true
+        explicit:
+          type: boolean
+        main_category:
+          type: string
+          nullable: true
+        sub_category:
+          type: string
+          nullable: true
+        main_category2:
+          type: string
+          nullable: true
+        sub_category2:
+          type: string
+          nullable: true
+        main_category3:
+          type: string
+          nullable: true
+        sub_category3:
+          type: string
+          nullable: true
+        language:
+          type: string
+        timezone:
+          type: string
+        artwork_url:
+          type: string
+        background_url:
+          type: string
+          nullable: true
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Token authentication. Send the header as `Authorization: Token token=YOUR_TOKEN`. Alternatively pass the token as an `api_token` query parameter. Tokens are found in the Buzzsprout admin account settings.'
