@@ -9,7 +9,20 @@ description: Buzzsprout is a podcast hosting platform that handles hosting, dist
   https://www.buzzsprout.com/api) so third parties can programmatically read and
   manage the podcasts and episodes on an account. The API is RESTful, JSON-serialized,
   SSL-only, and authenticated with a per-account token.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/buzzsprout.png
 tags:
 - Podcasting
 - Podcast Hosting
@@ -23,52 +36,44 @@ specificationVersion: '0.19'
 apis:
 - aid: buzzsprout:buzzsprout-episodes-api
   name: Buzzsprout Episodes API
-  tags:
-  - Episodes
-  - Audio
-  - Publishing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: The episodes belonging to a Buzzsprout podcast.
   humanURL: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/episodes.md
   baseURL: https://www.buzzsprout.com/api
+  tags:
+  - Episodes
   properties:
-  - url: https://github.com/buzzsprout/buzzsprout-api
-    type: Documentation
-  - url: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/episodes.md
-    type: APIReference
-  - url: openapi/buzzsprout-openapi.yml
-    type: OpenAPI
-  - url: collections/buzzsprout.postman_collection.json
-    type: PostmanCollection
-  - url: collections/buzzsprout.opencollection.json
-    type: OpenCollection
-  description: List, retrieve, create, and update the episodes on a Buzzsprout podcast.
-    Episodes are scoped to a podcast id at /api/{podcast_id}/episodes.json, and audio
-    can be attached by URL or file upload with optional email notification after
-    processing. Requests are SSL-only and token-authenticated.
+  - type: OpenAPI
+    url: openapi/buzzsprout-episodes-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/buzzsprout/buzzsprout-api
+  - type: APIReference
+    url: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/episodes.md
+  - type: PostmanCollection
+    url: collections/buzzsprout.postman_collection.json
+  - type: OpenCollection
+    url: collections/buzzsprout.opencollection.json
+  - type: APIReference
+    url: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/podcasts.md
 - aid: buzzsprout:buzzsprout-podcasts-api
   name: Buzzsprout Podcasts API
+  description: The podcasts on a Buzzsprout account.
+  humanURL: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/episodes.md
+  baseURL: https://www.buzzsprout.com/api
   tags:
   - Podcasts
-  - Directories
-  - Metadata
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/podcasts.md
-  baseURL: https://www.buzzsprout.com/api
   properties:
-  - url: https://github.com/buzzsprout/buzzsprout-api
-    type: Documentation
-  - url: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/podcasts.md
-    type: APIReference
-  - url: openapi/buzzsprout-openapi.yml
-    type: OpenAPI
-  - url: collections/buzzsprout.postman_collection.json
-    type: PostmanCollection
-  - url: collections/buzzsprout.opencollection.json
-    type: OpenCollection
-  description: List the podcasts on a Buzzsprout account at /api/podcasts.json,
-    returning each show's title, author, description, contact email, categories,
-    language, timezone, artwork, and website. Used to discover podcast ids that
-    scope the Episodes API.
+  - type: OpenAPI
+    url: openapi/buzzsprout-podcasts-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/buzzsprout/buzzsprout-api
+  - type: APIReference
+    url: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/episodes.md
+  - type: PostmanCollection
+    url: collections/buzzsprout.postman_collection.json
+  - type: OpenCollection
+    url: collections/buzzsprout.opencollection.json
+  - type: APIReference
+    url: https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/podcasts.md
 common:
 - type: AgenticAccess
   url: agentic-access/buzzsprout-agentic-access.yml
