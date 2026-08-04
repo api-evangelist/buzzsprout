@@ -1,0 +1,301 @@
+openapi: 3.0.3
+info:
+  title: Buzzsprout API
+  description: >-
+    The Buzzsprout API is a documented public REST API for the Buzzsprout podcast
+    hosting platform, intended for third parties integrating with the service. It
+    is designed around RESTful concepts with JSON for serialization. All requests
+    are SSL-only against the base URL https://www.buzzsprout.com/api, where episode
+    resources are scoped to a numeric podcast id (for example
+    /api/{podcast_id}/episodes.json). Authentication uses a simple token scheme:
+    the token is sent in the Authorization header as `Token token=YOUR_TOKEN`, or
+    as an `api_token` query parameter. Clients must send a custom User-Agent (some
+    default agents are blocked) and set Content-Type to
+    `application/json; charset=utf-8` on POST and PUT requests. Responses carry
+    ETag / Last-Modified headers for conditional (304) requests. Only the endpoints
+    documented in the official buzzsprout/buzzsprout-api repository are modeled here.
+  version: '1.0'
+  contact:
+    name: Buzzsprout
+    url: https://www.buzzsprout.com
+servers:
+  - url: https://www.buzzsprout.com/api
+    description: Buzzsprout API (SSL only)
+security:
+  - tokenAuth: []
+tags:
+  - name: Podcasts
+    description: The podcasts on a Buzzsprout account.
+  - name: Episodes
+    description: The episodes belonging to a Buzzsprout podcast.
+paths:
+  /podcasts.json:
+    get:
+      operationId: listPodcasts
+      tags:
+        - Podcasts
+      summary: List podcasts
+      description: >-
+        Lists the podcasts on the authenticated Buzzsprout account. Use the
+        returned podcast id to scope Episodes API requests.
+      responses:
+        '200':
+          description: A list of podcasts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Podcast'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /{podcast_id}/episodes.json:
+    parameters:
+      - $ref: '#/components/parameters/PodcastId'
+    get:
+      operationId: listEpisodes
+      tags:
+        - Episodes
+      summary: Get episodes
+      description: Retrieves all episodes for the given podcast.
+      responses:
+        '200':
+          description: A list of episodes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Episode'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createEpisode
+      tags:
+        - Episodes
+      summary: Create an episode
+      description: >-
+        Creates a new episode on the given podcast. Audio can be provided as an
+        `audio_url` pointing to an external file, or uploaded directly as an
+        `audio_file`. Artwork can likewise be provided as `artwork_url` or
+        `artwork_file`. Set `email_user_after_audio_processed` to control the
+        processing-complete notification email.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EpisodeInput'
+      responses:
+        '201':
+          description: The created episode.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Episode'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+  /{podcast_id}/episodes/{id}.json:
+    parameters:
+      - $ref: '#/components/parameters/PodcastId'
+      - $ref: '#/components/parameters/EpisodeId'
+    get:
+      operationId: getEpisode
+      tags:
+        - Episodes
+      summary: Get an episode
+      description: Retrieves a single episode by id.
+      responses:
+        '200':
+          description: The requested episode.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Episode'
+        '304':
+          description: Not modified (conditional request matched ETag / Last-Modified).
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateEpisode
+      tags:
+        - Episodes
+      summary: Update an episode
+      description: >-
+        Updates an existing episode. Send only the fields to change - for example
+        `title` or `private`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EpisodeInput'
+      responses:
+        '200':
+          description: The updated episode.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Episode'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        Token authentication. Send the header as `Authorization: Token
+        token=YOUR_TOKEN`. Alternatively pass the token as an `api_token` query
+        parameter. Tokens are found in the Buzzsprout admin account settings.
+  parameters:
+    PodcastId:
+      name: podcast_id
+      in: path
+      required: true
+      description: The numeric Buzzsprout podcast identifier.
+      schema:
+        type: integer
+    EpisodeId:
+      name: id
+      in: path
+      required: true
+      description: The numeric episode identifier.
+      schema:
+        type: integer
+  responses:
+    Unauthorized:
+      description: Missing or invalid token.
+    NotFound:
+      description: The requested resource was not found.
+    UnsupportedMediaType:
+      description: >-
+        The request was not sent with Content-Type
+        application/json; charset=utf-8.
+  schemas:
+    Podcast:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        author:
+          type: string
+        description:
+          type: string
+        website_address:
+          type: string
+          nullable: true
+        contact_email:
+          type: string
+        keywords:
+          type: string
+          nullable: true
+        explicit:
+          type: boolean
+        main_category:
+          type: string
+          nullable: true
+        sub_category:
+          type: string
+          nullable: true
+        main_category2:
+          type: string
+          nullable: true
+        sub_category2:
+          type: string
+          nullable: true
+        main_category3:
+          type: string
+          nullable: true
+        sub_category3:
+          type: string
+          nullable: true
+        language:
+          type: string
+        timezone:
+          type: string
+        artwork_url:
+          type: string
+        background_url:
+          type: string
+          nullable: true
+    Episode:
+      allOf:
+        - $ref: '#/components/schemas/EpisodeInput'
+        - type: object
+          properties:
+            id:
+              type: integer
+            audio_url:
+              type: string
+            artwork_url:
+              type: string
+            total_plays:
+              type: integer
+    EpisodeInput:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        summary:
+          type: string
+        artist:
+          type: string
+        tags:
+          type: string
+        published_at:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          description: Episode length in seconds.
+        guid:
+          type: string
+        inactive_at:
+          type: string
+          format: date-time
+          nullable: true
+        episode_number:
+          type: integer
+        season_number:
+          type: integer
+        explicit:
+          type: boolean
+        private:
+          type: boolean
+        hq:
+          type: boolean
+        magic_mastering:
+          type: boolean
+        email_user_after_audio_processed:
+          type: boolean
+          description: >-
+            Send the user an email once the file has finished processing or if an
+            error occurred. Defaults to enabled.
+        audio_url:
+          type: string
+          description: URL of an external audio file to import (alternative to audio_file).
+        audio_file:
+          type: string
+          format: binary
+          description: Audio file upload (alternative to audio_url).
+        artwork_url:
+          type: string
+          description: URL of external artwork (alternative to artwork_file).
+        artwork_file:
+          type: string
+          format: binary
+          description: Artwork file upload (alternative to artwork_url).

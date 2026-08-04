@@ -1,0 +1,16 @@
+{
+  "provider": "buzzsprout",
+  "sources": [
+    "buzzsprout-episodes-api-openapi.yml",
+    "buzzsprout-podcasts-api-openapi.yml"
+  ],
+  "outputs": [
+    "buzzsprout-episodes-api-openapi.yml",
+    "buzzsprout-podcasts-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
