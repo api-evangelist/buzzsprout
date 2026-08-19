@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buzzsprout Episodes Podcasts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Podcasts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List podcasts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.buzzsprout.com/api/podcasts.json"
+          },
+          "docs": "Lists the podcasts on the authenticated Buzzsprout account. Use the returned podcast id to scope Episodes API requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,967 @@
+{
+  "item": [
+    {
+      "id": "04a7cfb7-dda9-4d74-9e4d-3c2af3ae83d7",
+      "name": "Episodes",
+      "description": {
+        "content": "The episodes belonging to a Buzzsprout podcast.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3a0991be-59cc-4a21-9727-641553bd8e65",
+          "name": "Get episodes",
+          "request": {
+            "name": "Get episodes",
+            "description": {
+              "content": "Retrieves all episodes for the given podcast.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":podcast_id",
+                "episodes.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "podcast_id",
+                  "description": "(Required) The numeric Buzzsprout podcast identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe2dd617-ac56-439b-a4dc-28d3253f38c6",
+              "name": "A list of episodes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"summary\": \"string\",\n    \"artist\": \"string\",\n    \"tags\": \"string\",\n    \"published_at\": \"2025-02-22T22:43:09.858Z\",\n    \"duration\": 4733,\n    \"guid\": \"string\",\n    \"inactive_at\": \"1989-01-03T18:29:57.153Z\",\n    \"episode_number\": 92,\n    \"season_number\": 3214,\n    \"explicit\": false,\n    \"private\": true,\n    \"hq\": false,\n    \"magic_mastering\": true,\n    \"email_user_after_audio_processed\": true,\n    \"audio_url\": \"string\",\n    \"audio_file\": \"string\",\n    \"artwork_url\": \"string\",\n    \"artwork_file\": \"string\",\n    \"id\": 8863,\n    \"total_plays\": 6230\n  },\n  {\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"summary\": \"string\",\n    \"artist\": \"string\",\n    \"tags\": \"string\",\n    \"published_at\": \"2025-08-25T00:53:44.698Z\",\n    \"duration\": 7192,\n    \"guid\": \"string\",\n    \"inactive_at\": \"2005-08-05T06:21:13.362Z\",\n    \"episode_number\": 1086,\n    \"season_number\": 8849,\n    \"explicit\": true,\n    \"private\": true,\n    \"hq\": true,\n    \"magic_mastering\": true,\n    \"email_user_after_audio_processed\": true,\n    \"audio_url\": \"string\",\n    \"audio_file\": \"string\",\n    \"artwork_url\": \"string\",\n    \"artwork_file\": \"string\",\n    \"id\": 1357,\n    \"total_plays\": 5098\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7aeccb10-d099-4a87-9805-cb92b1735dd8",
+              "name": "Missing or invalid token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cae096f-1f26-4c4e-b841-ce762c6f959d",
+          "name": "Create an episode",
+          "request": {
+            "name": "Create an episode",
+            "description": {
+              "content": "Creates a new episode on the given podcast. Audio can be provided as an `audio_url` pointing to an external file, or uploaded directly as an `audio_file`. Artwork can likewise be provided as `artwork_url` or `artwork_file`. Set `email_user_after_audio_processed` to control the processing-complete notification email.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":podcast_id",
+                "episodes.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "podcast_id",
+                  "description": "(Required) The numeric Buzzsprout podcast identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"artist\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"published_at\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"guid\": \"<string>\",\n  \"inactive_at\": \"<dateTime>\",\n  \"episode_number\": \"<integer>\",\n  \"season_number\": \"<integer>\",\n  \"explicit\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"hq\": \"<boolean>\",\n  \"magic_mastering\": \"<boolean>\",\n  \"email_user_after_audio_processed\": \"<boolean>\",\n  \"audio_url\": \"<string>\",\n  \"audio_file\": \"<binary>\",\n  \"artwork_url\": \"<string>\",\n  \"artwork_file\": \"<binary>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0352f0b8-2120-4ac8-bf29-7b5d053498d7",
+              "name": "The created episode.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"artist\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"published_at\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"guid\": \"<string>\",\n  \"inactive_at\": \"<dateTime>\",\n  \"episode_number\": \"<integer>\",\n  \"season_number\": \"<integer>\",\n  \"explicit\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"hq\": \"<boolean>\",\n  \"magic_mastering\": \"<boolean>\",\n  \"email_user_after_audio_processed\": \"<boolean>\",\n  \"audio_url\": \"<string>\",\n  \"audio_file\": \"<binary>\",\n  \"artwork_url\": \"<string>\",\n  \"artwork_file\": \"<binary>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"artist\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"published_at\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"guid\": \"<string>\",\n  \"inactive_at\": \"<dateTime>\",\n  \"episode_number\": \"<integer>\",\n  \"season_number\": \"<integer>\",\n  \"explicit\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"hq\": \"<boolean>\",\n  \"magic_mastering\": \"<boolean>\",\n  \"email_user_after_audio_processed\": \"<boolean>\",\n  \"audio_url\": \"<string>\",\n  \"audio_file\": \"<binary>\",\n  \"artwork_url\": \"<string>\",\n  \"artwork_file\": \"<binary>\",\n  \"id\": 6684,\n  \"total_plays\": 9311\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12865984-ebf9-43c3-a1a9-645394c4dd65",
+              "name": "Missing or invalid token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"artist\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"published_at\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"guid\": \"<string>\",\n  \"inactive_at\": \"<dateTime>\",\n  \"episode_number\": \"<integer>\",\n  \"season_number\": \"<integer>\",\n  \"explicit\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"hq\": \"<boolean>\",\n  \"magic_mastering\": \"<boolean>\",\n  \"email_user_after_audio_processed\": \"<boolean>\",\n  \"audio_url\": \"<string>\",\n  \"audio_file\": \"<binary>\",\n  \"artwork_url\": \"<string>\",\n  \"artwork_file\": \"<binary>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "970244bc-dc52-4a99-89b8-8483b2a46d0a",
+              "name": "The request was not sent with Content-Type application/json; charset=utf-8.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"artist\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"published_at\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"guid\": \"<string>\",\n  \"inactive_at\": \"<dateTime>\",\n  \"episode_number\": \"<integer>\",\n  \"season_number\": \"<integer>\",\n  \"explicit\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"hq\": \"<boolean>\",\n  \"magic_mastering\": \"<boolean>\",\n  \"email_user_after_audio_processed\": \"<boolean>\",\n  \"audio_url\": \"<string>\",\n  \"audio_file\": \"<binary>\",\n  \"artwork_url\": \"<string>\",\n  \"artwork_file\": \"<binary>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f65c1e5b-3d24-4c24-ab1e-648ad6828a3e",
+          "name": "Get an episode",
+          "request": {
+            "name": "Get an episode",
+            "description": {
+              "content": "Retrieves a single episode by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":podcast_id",
+                "episodes",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "podcast_id",
+                  "description": "(Required) The numeric Buzzsprout podcast identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a383f6f7-bc6d-45c3-bb90-96b4961240d6",
+              "name": "The requested episode.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"artist\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"published_at\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"guid\": \"<string>\",\n  \"inactive_at\": \"<dateTime>\",\n  \"episode_number\": \"<integer>\",\n  \"season_number\": \"<integer>\",\n  \"explicit\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"hq\": \"<boolean>\",\n  \"magic_mastering\": \"<boolean>\",\n  \"email_user_after_audio_processed\": \"<boolean>\",\n  \"audio_url\": \"<string>\",\n  \"audio_file\": \"<binary>\",\n  \"artwork_url\": \"<string>\",\n  \"artwork_file\": \"<binary>\",\n  \"id\": 6684,\n  \"total_plays\": 9311\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58c7564a-35df-498d-9d53-eaa9a964e840",
+              "name": "Not modified (conditional request matched ETag / Last-Modified).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a2a0bce9-35ab-40c5-8ea8-7e4aa7184cc6",
+              "name": "Missing or invalid token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c53ed0fd-a915-40fa-af59-ff79fcff32d3",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a904c79-d12b-4918-960f-fbaa2c6e2cab",
+          "name": "Update an episode",
+          "request": {
+            "name": "Update an episode",
+            "description": {
+              "content": "Updates an existing episode. Send only the fields to change - for example `title` or `private`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":podcast_id",
+                "episodes",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "podcast_id",
+                  "description": "(Required) The numeric Buzzsprout podcast identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"artist\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"published_at\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"guid\": \"<string>\",\n  \"inactive_at\": \"<dateTime>\",\n  \"episode_number\": \"<integer>\",\n  \"season_number\": \"<integer>\",\n  \"explicit\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"hq\": \"<boolean>\",\n  \"magic_mastering\": \"<boolean>\",\n  \"email_user_after_audio_processed\": \"<boolean>\",\n  \"audio_url\": \"<string>\",\n  \"audio_file\": \"<binary>\",\n  \"artwork_url\": \"<string>\",\n  \"artwork_file\": \"<binary>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cb051c41-bb41-4cff-bb2e-549ac31eb77d",
+              "name": "The updated episode.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"artist\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"published_at\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"guid\": \"<string>\",\n  \"inactive_at\": \"<dateTime>\",\n  \"episode_number\": \"<integer>\",\n  \"season_number\": \"<integer>\",\n  \"explicit\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"hq\": \"<boolean>\",\n  \"magic_mastering\": \"<boolean>\",\n  \"email_user_after_audio_processed\": \"<boolean>\",\n  \"audio_url\": \"<string>\",\n  \"audio_file\": \"<binary>\",\n  \"artwork_url\": \"<string>\",\n  \"artwork_file\": \"<binary>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"artist\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"published_at\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"guid\": \"<string>\",\n  \"inactive_at\": \"<dateTime>\",\n  \"episode_number\": \"<integer>\",\n  \"season_number\": \"<integer>\",\n  \"explicit\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"hq\": \"<boolean>\",\n  \"magic_mastering\": \"<boolean>\",\n  \"email_user_after_audio_processed\": \"<boolean>\",\n  \"audio_url\": \"<string>\",\n  \"audio_file\": \"<binary>\",\n  \"artwork_url\": \"<string>\",\n  \"artwork_file\": \"<binary>\",\n  \"id\": 6684,\n  \"total_plays\": 9311\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "201821ca-4533-42f4-b41e-e3082f0b26e1",
+              "name": "Missing or invalid token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"artist\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"published_at\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"guid\": \"<string>\",\n  \"inactive_at\": \"<dateTime>\",\n  \"episode_number\": \"<integer>\",\n  \"season_number\": \"<integer>\",\n  \"explicit\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"hq\": \"<boolean>\",\n  \"magic_mastering\": \"<boolean>\",\n  \"email_user_after_audio_processed\": \"<boolean>\",\n  \"audio_url\": \"<string>\",\n  \"audio_file\": \"<binary>\",\n  \"artwork_url\": \"<string>\",\n  \"artwork_file\": \"<binary>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9310e789-92e7-40dd-bd17-862d4eb34bac",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"artist\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"published_at\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"guid\": \"<string>\",\n  \"inactive_at\": \"<dateTime>\",\n  \"episode_number\": \"<integer>\",\n  \"season_number\": \"<integer>\",\n  \"explicit\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"hq\": \"<boolean>\",\n  \"magic_mastering\": \"<boolean>\",\n  \"email_user_after_audio_processed\": \"<boolean>\",\n  \"audio_url\": \"<string>\",\n  \"audio_file\": \"<binary>\",\n  \"artwork_url\": \"<string>\",\n  \"artwork_file\": \"<binary>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "968bdbe9-777f-413f-b50e-a516fe3ae5c0",
+              "name": "The request was not sent with Content-Type application/json; charset=utf-8.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":podcast_id",
+                    "episodes",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "podcast_id",
+                      "description": "(Required) The numeric Buzzsprout podcast identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"artist\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"published_at\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"guid\": \"<string>\",\n  \"inactive_at\": \"<dateTime>\",\n  \"episode_number\": \"<integer>\",\n  \"season_number\": \"<integer>\",\n  \"explicit\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"hq\": \"<boolean>\",\n  \"magic_mastering\": \"<boolean>\",\n  \"email_user_after_audio_processed\": \"<boolean>\",\n  \"audio_url\": \"<string>\",\n  \"audio_file\": \"<binary>\",\n  \"artwork_url\": \"<string>\",\n  \"artwork_file\": \"<binary>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.buzzsprout.com/api",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The numeric episode identifier.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "id"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "18098ba4-a1e6-49f0-b73a-b35cca0fc00a",
+    "name": "Buzzsprout Episodes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Buzzsprout API is a documented public REST API for the Buzzsprout podcast hosting platform, intended for third parties integrating with the service. It is designed around RESTful concepts with JSON for serialization. All requests are SSL-only against the base URL https://www.buzzsprout.com/api, where episode resources are scoped to a numeric podcast id (for example /api/{podcast_id}/episodes.json). Authentication uses a simple token scheme: the token is sent in the Authorization header as `Token token=YOUR_TOKEN`, or as an `api_token` query parameter. Clients must send a custom User-Agent (some default agents are blocked) and set Content-Type to `application/json; charset=utf-8` on POST and PUT requests. Responses carry ETag / Last-Modified headers for conditional (304) requests. Only the endpoints documented in the official buzzsprout/buzzsprout-api repository are modeled here.\n\nContact Support:\n Name: Buzzsprout",
+      "type": "text/plain"
+    }
+  }
+}

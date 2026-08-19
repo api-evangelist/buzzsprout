@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buzzsprout Episodes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Episodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get episodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.buzzsprout.com/api/:podcast_id/episodes.json",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric Buzzsprout podcast identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves all episodes for the given podcast."
+        },
+        {
+          "info": {
+            "name": "Create an episode",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.buzzsprout.com/api/:podcast_id/episodes.json",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric Buzzsprout podcast identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new episode on the given podcast. Audio can be provided as an `audio_url` pointing to an external file, or uploaded directly as an `audio_file`. Artwork can likewise be provided as `artwork_url` or `artwork_file`. Set `email_user_after_audio_processed` to control the processing-complete notification email."
+        },
+        {
+          "info": {
+            "name": "Get an episode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.buzzsprout.com/api/:podcast_id/episodes/:id.json",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric Buzzsprout podcast identifier."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric episode identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves a single episode by id."
+        },
+        {
+          "info": {
+            "name": "Update an episode",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.buzzsprout.com/api/:podcast_id/episodes/:id.json",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric Buzzsprout podcast identifier."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric episode identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing episode. Send only the fields to change - for example `title` or `private`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,166 @@
+{
+  "item": [
+    {
+      "id": "494988ea-8cb6-4d29-af09-82827f33fa74",
+      "name": "Podcasts",
+      "description": {
+        "content": "The podcasts on a Buzzsprout account.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "038e361e-8ce9-4ab8-a844-194fecf44f1f",
+          "name": "List podcasts",
+          "request": {
+            "name": "List podcasts",
+            "description": {
+              "content": "Lists the podcasts on the authenticated Buzzsprout account. Use the returned podcast id to scope Episodes API requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "podcasts.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dfc976a0-ce1e-4d4e-bf1e-f8ad97a65c9f",
+              "name": "A list of podcasts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "podcasts.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 4867,\n    \"title\": \"string\",\n    \"author\": \"string\",\n    \"description\": \"string\",\n    \"website_address\": \"string\",\n    \"contact_email\": \"string\",\n    \"keywords\": \"string\",\n    \"explicit\": false,\n    \"main_category\": \"string\",\n    \"sub_category\": \"string\",\n    \"main_category2\": \"string\",\n    \"sub_category2\": \"string\",\n    \"main_category3\": \"string\",\n    \"sub_category3\": \"string\",\n    \"language\": \"string\",\n    \"timezone\": \"string\",\n    \"artwork_url\": \"string\",\n    \"background_url\": \"string\"\n  },\n  {\n    \"id\": 2377,\n    \"title\": \"string\",\n    \"author\": \"string\",\n    \"description\": \"string\",\n    \"website_address\": \"string\",\n    \"contact_email\": \"string\",\n    \"keywords\": \"string\",\n    \"explicit\": true,\n    \"main_category\": \"string\",\n    \"sub_category\": \"string\",\n    \"main_category2\": \"string\",\n    \"sub_category2\": \"string\",\n    \"main_category3\": \"string\",\n    \"sub_category3\": \"string\",\n    \"language\": \"string\",\n    \"timezone\": \"string\",\n    \"artwork_url\": \"string\",\n    \"background_url\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a02f6948-45e5-4999-8ce4-fe5e7cc19bbf",
+              "name": "Missing or invalid token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "podcasts.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.buzzsprout.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ccd668a7-3b0c-43a9-a3fa-ca65801afc82",
+    "name": "Buzzsprout Episodes Podcasts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Buzzsprout API is a documented public REST API for the Buzzsprout podcast hosting platform, intended for third parties integrating with the service. It is designed around RESTful concepts with JSON for serialization. All requests are SSL-only against the base URL https://www.buzzsprout.com/api, where episode resources are scoped to a numeric podcast id (for example /api/{podcast_id}/episodes.json). Authentication uses a simple token scheme: the token is sent in the Authorization header as `Token token=YOUR_TOKEN`, or as an `api_token` query parameter. Clients must send a custom User-Agent (some default agents are blocked) and set Content-Type to `application/json; charset=utf-8` on POST and PUT requests. Responses carry ETag / Last-Modified headers for conditional (304) requests. Only the endpoints documented in the official buzzsprout/buzzsprout-api repository are modeled here.\n\nContact Support:\n Name: Buzzsprout",
+      "type": "text/plain"
+    }
+  }
+}
