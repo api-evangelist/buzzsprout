@@ -32,7 +32,7 @@ tags:
 - RSS
 created: '2026-07-05'
 modified: '2026-07-05'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: buzzsprout:buzzsprout-episodes-api
   name: Buzzsprout Episodes API
