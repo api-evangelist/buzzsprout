@@ -9,6 +9,18 @@ description: Buzzsprout is a podcast hosting platform that handles hosting, dist
   https://www.buzzsprout.com/api) so third parties can programmatically read and
   manage the podcasts and episodes on an account. The API is RESTful, JSON-serialized,
   SSL-only, and authenticated with a per-account token.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
