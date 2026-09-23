@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Buzzsprout Episodes Podcasts API
-  description: 'The Buzzsprout API is a documented public REST API for the Buzzsprout podcast hosting platform, intended for third parties integrating with the service. It is designed around RESTful concepts with JSON for serialization. All requests are SSL-only against the base URL https://www.buzzsprout.com/api, where episode resources are scoped to a numeric podcast id (for example /api/{podcast_id}/episodes.json). Authentication uses a simple token scheme: the token is sent in the Authorization header as `Token token=YOUR_TOKEN`, or as an `api_token` query parameter. Clients must send a custom User-Agent (some default agents are blocked) and set Content-Type to `application/json; charset=utf-8` on POST and PUT requests. Responses carry ETag / Last-Modified headers for conditional (304) requests. Only the endpoints documented in the official buzzsprout/buzzsprout-api repository are modeled here.'
+  title: Buzzsprout Podcasts API
+  description: The Buzzsprout API is a documented public REST API for the Buzzsprout podcast hosting platform, intended for third parties integrating with the service.
   version: '1.0'
   contact:
     name: Buzzsprout
@@ -50,33 +50,41 @@ components:
         description:
           type: string
         website_address:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         contact_email:
           type: string
         keywords:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         explicit:
           type: boolean
         main_category:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         sub_category:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         main_category2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         sub_category2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         main_category3:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         sub_category3:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         language:
           type: string
         timezone:
@@ -84,8 +92,9 @@ components:
         artwork_url:
           type: string
         background_url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
   securitySchemes:
     tokenAuth:
       type: apiKey

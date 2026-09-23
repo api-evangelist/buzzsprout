@@ -1,8 +1,7 @@
 {
   "provider": "buzzsprout",
   "sources": [
-    "buzzsprout-episodes-api-openapi.yml",
-    "buzzsprout-podcasts-api-openapi.yml"
+    "_original/buzzsprout-openapi.yml"
   ],
   "outputs": [
     "buzzsprout-episodes-api-openapi.yml",
@@ -11,6 +10,13 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "buzzsprout-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "buzzsprout-episodes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "buzzsprout-podcasts-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
