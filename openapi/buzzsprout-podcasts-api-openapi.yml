@@ -34,9 +34,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid token.
   schemas:
     Podcast:
       type: object
@@ -95,6 +92,9 @@ components:
           type:
           - string
           - 'null'
+  responses:
+    Unauthorized:
+      description: Missing or invalid token.
   securitySchemes:
     tokenAuth:
       type: apiKey
