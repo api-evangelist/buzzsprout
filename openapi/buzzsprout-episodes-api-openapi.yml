@@ -108,12 +108,12 @@ paths:
           $ref: '#/components/responses/UnsupportedMediaType'
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
     UnsupportedMediaType:
       description: The request was not sent with Content-Type application/json; charset=utf-8.
     Unauthorized:
       description: Missing or invalid token.
+    NotFound:
+      description: The requested resource was not found.
   schemas:
     Episode:
       allOf:
@@ -184,18 +184,18 @@ components:
           format: binary
           description: Artwork file upload (alternative to artwork_url).
   parameters:
-    EpisodeId:
-      name: id
-      in: path
-      required: true
-      description: The numeric episode identifier.
-      schema:
-        type: integer
     PodcastId:
       name: podcast_id
       in: path
       required: true
       description: The numeric Buzzsprout podcast identifier.
+      schema:
+        type: integer
+    EpisodeId:
+      name: id
+      in: path
+      required: true
+      description: The numeric episode identifier.
       schema:
         type: integer
   securitySchemes:
