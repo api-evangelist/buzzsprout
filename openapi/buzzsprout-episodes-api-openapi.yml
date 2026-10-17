@@ -115,19 +115,6 @@ components:
     NotFound:
       description: The requested resource was not found.
   schemas:
-    Episode:
-      allOf:
-      - $ref: '#/components/schemas/EpisodeInput'
-      - type: object
-        properties:
-          id:
-            type: integer
-          audio_url:
-            type: string
-          artwork_url:
-            type: string
-          total_plays:
-            type: integer
     EpisodeInput:
       type: object
       properties:
@@ -183,19 +170,32 @@ components:
           type: string
           format: binary
           description: Artwork file upload (alternative to artwork_url).
+    Episode:
+      allOf:
+      - $ref: '#/components/schemas/EpisodeInput'
+      - type: object
+        properties:
+          id:
+            type: integer
+          audio_url:
+            type: string
+          artwork_url:
+            type: string
+          total_plays:
+            type: integer
   parameters:
-    PodcastId:
-      name: podcast_id
-      in: path
-      required: true
-      description: The numeric Buzzsprout podcast identifier.
-      schema:
-        type: integer
     EpisodeId:
       name: id
       in: path
       required: true
       description: The numeric episode identifier.
+      schema:
+        type: integer
+    PodcastId:
+      name: podcast_id
+      in: path
+      required: true
+      description: The numeric Buzzsprout podcast identifier.
       schema:
         type: integer
   securitySchemes:
