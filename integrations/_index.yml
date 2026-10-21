@@ -72,3 +72,132 @@
     builder: Fivetran
   status: not-a-workflow
   arazzo: null
+- slug: buzzsprout-podcast-index-apps-directory
+  label: Podcast Index (apps directory)
+  partner: podcastindex
+  partner_name: Podcast Index (apps directory)
+  category: open podcast namespace (Podcasting 2.0)
+  type: register
+  channel: standard-directory
+  evidence: https://podcastindex.org/apps
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Podcast Index apps directory (podcastindex.org/api/apps)
+    standard: 'podcast: RSS namespace (Podcasting 2.0)'
+    spec_file: null
+    role: podcastindex-listed-app
+    registered_name: Buzzsprout
+    register_id: https://www.buzzsprout.com
+    app_types:
+    - hosting
+    supported_elements:
+    - Chapters
+    - Funding
+    - Locked
+    - OP3
+    - Person
+    - Podping
+    - Podroll
+    - Remote Item
+    - Soundbite
+    - Transcript
+    matched_domain: buzzsprout.com
+    matched_by: domain
+    signal_note: 'participation only: the directory is self-listed and tests nothing (no certified_products); supported_elements
+      is a per-edge signal, never counted'
+    detected_by: sweep-podcasting-2-0.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: buzzsprout-podcast-namespace-element-support
+  label: Podcast Namespace (element support)
+  partner: podcastindex
+  partner_name: Podcast Namespace (element support)
+  category: open podcast namespace (Podcasting 2.0)
+  type: register
+  channel: standard-directory
+  evidence: https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/element-support.md
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: podcast namespace element support (Podcastindex-org/podcast-namespace docs/element-support.md)
+    standard: 'podcast: RSS namespace (Podcasting 2.0)'
+    spec_file: null
+    role: namespace-implementer
+    registered_name: Buzzsprout
+    register_id: https://www.buzzsprout.com/blog/transcribe-your-podcast
+    supported_elements:
+    - Funding
+    - GUID
+    - Locked
+    - Soundbites
+    - Transcript
+    matched_domain: buzzsprout.com
+    matched_by: domain
+    signal_note: 'participation only: production support announced per element; elements are a per-edge signal,
+      never counted'
+    detected_by: sweep-podcasting-2-0.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: buzzsprout-iab-tech-lab-podcast-measurement-compliance
+  label: IAB Tech Lab Podcast Measurement compliance
+  partner: iab-tech-lab
+  partner_name: IAB Tech Lab Podcast Measurement compliance
+  category: podcast measurement certification
+  type: register
+  channel: standard-directory
+  evidence: https://iabtechlab.com/compliance-programs/compliant-companies/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: 'IAB Tech Lab compliant companies: Podcast Measurement (iabtechlab.com/compliance-programs/compliant-companies/)'
+    standard: IAB Tech Lab Podcast Measurement Technical Guidelines
+    spec_file: null
+    role: iab-podcast-measurement-compliant
+    registered_name: Buzzsprout
+    register_id: https://compliance.iabtechnologylab.com/compliant-companies-certificates/Buzzsprout - IAB Podcast
+      Measurement Report 10.27.2025.pdf
+    matched_domain: buzzsprout.com
+    matched_by: domain
+    certified_products:
+    - product_type: podcast measurement
+      standard_version: '2.2'
+      metrics:
+      - Download
+      - Listener
+      last_certified: '2025-10-29'
+      lapsed: false
+    signal_note: certified_products = ONE entry (product type podcast measurement); metrics and version are context;
+      lapsed when last certified is more than 365 days ago (annual renewal)
+    detected_by: sweep-podcasting-2-0.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: buzzsprout-apple-own
+  label: Apple (own)
+  partner: apple
+  partner_name: Apple (own)
+  category: podcast hosting
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.buzzsprout.com
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: buzzsprout-spotify-own
+  label: Spotify (own)
+  partner: spotify
+  partner_name: Spotify (own)
+  category: podcast hosting
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.buzzsprout.com/help/59-submit-to-spotify
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
