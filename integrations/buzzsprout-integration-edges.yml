@@ -206,6 +206,31 @@ edges:
   detected: '2026-10-21'
   detected_by: mirror-platform-listings.py
   category: podcast hosting
+- partner_name: IFTTT
+  partner: ifttt
+  partner_match: aggregator
+  type: marketplace
+  marketplace: ifttt-services
+  channel: ipaas-listing
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://ifttt.com/buzzsprout
+  category: null
+  contract_reference:
+    register: IFTTT service directory (ifttt.com/explore/services; ifttt.com/<service>)
+    spec_file: null
+    role: ipaas-connector:ifttt
+    registered_name: Buzzsprout
+    matched_domain: buzzsprout.com
+    matched_by: domain
+    app_slug: buzzsprout
+    ifttt_category: ''
+    builder: unknown (the service page does not say who built it)
+    detected_by: sweep-ifttt-services.py
+    detected: '2026-10-23'
+    signal_note: one edge per (provider, platform); triggers, actions and applet counts are context, never read
+  detected_by: sweep-ifttt-services.py
+  first_seen: '2026-10-23'
 generated: '2026-10-15'
 method: searched
 checked:
@@ -219,5 +244,8 @@ checked:
 - https://podcastindex.org/api/apps
 - https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/docs/element-support.md
 - https://support.spotify.com/us/creators/article/getting-your-podcast-on-spotify/
+- https://ifttt.com/buzzsprout
+- https://ifttt.com/explore/services
+- https://ifttt.com/sitemap_services.xml
 source:
 - wordpress/integrations/wordpress-integration-edges.yml
