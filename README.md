@@ -1,4 +1,4 @@
-# Buzzsprout (buzzsprout)
+# Buzzsprout
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,89 +64,120 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Buzzsprout is a podcast hosting platform that handles hosting, distribution, promotion, and analytics for podcasters - uploading and optimizing audio, publishing an RSS feed, listing shows in directories like Apple Podcasts and Spotify, and reporting on plays. Buzzsprout also exposes a documented public REST API (base `https://www.buzzsprout.com/api`) so third parties can programmatically read and manage the podcasts and episodes on an account.
+Buzzsprout is a podcast hosting platform that handles hosting, distribution, promotion, and analytics for podcasters - uploading and optimizing audio, publishing an RSS feed, listing shows in directories like Apple Podcasts and Spotify, and reporting on plays. Buzzsprout also exposes a documented public REST API (base https://www.buzzsprout.com/api) so third parties can programmatically read and manage the podcasts and episodes on an account. The API is RESTful, JSON-serialized, SSL-only, and authenticated with a per-account token.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/buzzsprout/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/buzzsprout/refs/heads/main/apis.yml)
+**Areas:** Podcasts · Podcast Hosting · Audio · Media · Episodes · RSS
 
-## Access Model
+## Buzzsprout on APIs.io
 
-The Buzzsprout API is a **documented public REST API** intended for third parties integrating with the platform. Its official reference lives in the public GitHub repository [buzzsprout/buzzsprout-api](https://github.com/buzzsprout/buzzsprout-api). Key characteristics:
+Everything profiled for Buzzsprout is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/buzzsprout/](https://apis.io/providers/buzzsprout/)** — or go straight to one of the APIs or properties below.
 
-- **RESTful and JSON-serialized**, over **SSL only**. Base URL: `https://www.buzzsprout.com/api`.
-- **Token authentication.** Send the token as the header `Authorization: Token token=YOUR_TOKEN` (the token is prefixed by the literal `token=` with no whitespace), or as an `api_token` query parameter. Tokens come from the Buzzsprout admin account section.
-- **Account-scoped, not open access.** You operate only on the podcasts and episodes belonging to your own account; the podcast id in the episode paths comes from your account.
-- **Client requirements.** A custom `User-Agent` is required (some default agents are blocked). POST/PUT requests must use `Content-Type: application/json; charset=utf-8` or the API returns `415`. Responses carry `ETag` / `Last-Modified` for conditional (`304`) requests, and clients should retry on `5xx` errors.
-- **No WebSocket.** Buzzsprout's own API is request/response REST; distribution happens through the RSS feed and downstream directories. See [review.yml](review.yml).
+### APIs (2)
 
-## Tags
+- [Buzzsprout Episodes API](https://apis.io/apis/buzzsprout/buzzsprout-episodes-api/) — The episodes belonging to a Buzzsprout podcast.
+- [Buzzsprout Podcasts API](https://apis.io/apis/buzzsprout/buzzsprout-podcasts-api/) — The podcasts on a Buzzsprout account.
 
-- Podcasting
-- Podcast Hosting
-- Audio
-- Media
-- Episodes
-- RSS
+### Published properties
 
-## Timestamps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Created:** 2026-07-05
-- **Modified:** 2026-07-05
+#### Agentic access (1)
 
-## APIs
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Buzzsprout Episodes API
+- [Buzzsprout Agentic Access](https://apis.io/agentic-access/buzzsprout/buzzsprout-agentic-access/)
 
-List, retrieve, create, and update the episodes on a Buzzsprout podcast. Episodes are scoped to a podcast id at `/api/{podcast_id}/episodes.json`, and audio can be attached by URL (`audio_url`) or file upload (`audio_file`) with optional email notification after processing.
+#### Collections (3)
 
-- **Human URL:** [https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/episodes.md](https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/episodes.md)
-- **Base URL:** `https://www.buzzsprout.com/api`
+Postman and Open Collection request collections.
 
-#### Tags
+- [Buzzsprout API](https://apis.io/collections/buzzsprout/open-buzzsprout/)
+- [Buzzsprout Episodes API](https://apis.io/collections/buzzsprout/open-buzzsprout-episodes-api/)
+- [Buzzsprout Episodes Podcasts API](https://apis.io/collections/buzzsprout/open-buzzsprout-podcasts-api/)
 
-- Episodes
-- Audio
-- Publishing
+#### Security (2)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://github.com/buzzsprout/buzzsprout-api)
-- [API Reference](https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/episodes.md)
-- [OpenAPI](openapi/buzzsprout-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/buzzsprout.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/buzzsprout.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Buzzsprout Authentication](https://apis.io/security/buzzsprout/buzzsprout-authentication/)
+- [Buzzsprout Domain Security](https://apis.io/security/buzzsprout/buzzsprout-domain-security/)
 
-### Buzzsprout Podcasts API
+#### Plans and pricing (1)
 
-List the podcasts on a Buzzsprout account at `/api/podcasts.json`, returning each show's title, author, description, contact email, categories, language, timezone, artwork, and website. Used to discover the podcast ids that scope the Episodes API.
+Published plans, tiers and prices.
 
-- **Human URL:** [https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/podcasts.md](https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/podcasts.md)
-- **Base URL:** `https://www.buzzsprout.com/api`
+- [Buzzsprout Plans Pricing](https://apis.io/plans/buzzsprout/buzzsprout-plans-pricing/)
 
-#### Tags
+#### Rate limits (1)
 
-- Podcasts
-- Directories
-- Metadata
+Published request limits.
 
-#### Properties
+- [Buzzsprout Rate Limits](https://apis.io/rate-limits/buzzsprout/buzzsprout-rate-limits/)
 
-- [Documentation](https://github.com/buzzsprout/buzzsprout-api)
-- [API Reference](https://github.com/buzzsprout/buzzsprout-api/blob/master/sections/podcasts.md)
-- [OpenAPI](openapi/buzzsprout-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/buzzsprout.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/buzzsprout.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### FinOps (1)
 
-## Common Properties
+What the API costs to run, by operation.
 
-- [GitHub Organization](https://github.com/buzzsprout)
-- [LinkedIn](https://www.linkedin.com/company/buzzsprout)
+- [Buzzsprout Finops](https://apis.io/finops/buzzsprout/buzzsprout-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.buzzsprout.com)
 - [Documentation](https://github.com/buzzsprout/buzzsprout-api)
-- [Plans](plans/buzzsprout-plans-pricing.yml)
-- [Rate Limits](rate-limits/buzzsprout-rate-limits.yml)
-- [Fin Ops](finops/buzzsprout-finops.yml)
+- [Blog](https://www.buzzsprout.com/blog)
+- [GitHub](https://github.com/buzzsprout)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.2 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/buzzsprout/](https://apis.io/providers/buzzsprout/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Buzzsprout: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/buzzsprout/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
